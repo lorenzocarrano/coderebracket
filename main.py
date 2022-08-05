@@ -1,4 +1,5 @@
 import os
+import sys
 fileExtensions = ['.c']
 
 def OtherCharactersAfterBracket(line):
@@ -37,10 +38,19 @@ def ModifiedFilesDisplay(list):
         print(element)
 
 def main():
+    if len(sys.argv) == 1:
+        pathToStart = '.'
+    elif len(sys.argv) == 2:
+        pathToStart = sys.argv[1]
+    else:
+        print('uncorrect parameters')
+        return
+
+
     filesList = []
     modifiedFilesList = []
     for extension in fileExtensions:
-        for root, dirs, files in os.walk("."):
+        for root, dirs, files in os.walk(pathToStart):
             for file in files:
                 if file.endswith(extension):
                     filesList.append(os.path.join(root, file))
