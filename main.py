@@ -7,7 +7,7 @@ def OtherCharactersAfterBracket(line):
     bracketPos = line.rfind('{')
     for i in range(bracketPos+1, lineLen):
         print('character: ', line[i])
-        if line[i] == ' ' or line[i] == '\t' or line[i] == '\n' or line[i] == '\r':
+        if line[i] == ' ' or line[i] == '\t' or line[i] == '\n' or line[i] == '\r' or line[i] == '\0' or bracketPos == lineLen:
             continue
         else:
             print('returning True')
@@ -31,8 +31,14 @@ def FilesListPreview(list):
     for element in list:
         print(element)
 
+def ModifiedFilesDisplay(list):
+    print('Modified Files:')
+    for element in list:
+        print(element)
+
 def main():
     filesList = []
+    modifiedFilesList = []
     for extension in fileExtensions:
         for root, dirs, files in os.walk("."):
             for file in files:
@@ -40,6 +46,7 @@ def main():
                     filesList.append(os.path.join(root, file))
     FilesListPreview(filesList)
     for filePath in filesList:
+        flag = 0
         file = open(filePath, 'r')
         # Reading the contents of the file and closing
         lines = file.readlines()
@@ -48,6 +55,9 @@ def main():
         while i < len(lines):
             if '{' in lines[i]:
                 if OtherCharactersAfterBracket(lines[i]) == False:
+                    if flag == 0:
+                        modifiedFilesList.append(filePath)
+                        flag = 1
                     bracketPosition = lines[i].rfind('{')
                     lines[i] = lines[i][:bracketPosition] + '' + lines[i][bracketPosition+1:]
                     nIter = CountLeadingTabs(lines[i])
@@ -63,6 +73,9 @@ def main():
         for line in lines:
             file.write(line)
         file.close()
+
+    ModifiedFilesDisplay(modifiedFilesList)
+
 
 if __name__ == "__main__":
     main()
