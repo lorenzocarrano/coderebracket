@@ -37,10 +37,16 @@ def ModifiedFilesDisplay(list):
     for element in list:
         print(element)
 
+def PrintHelp():
+    print('pyrebracket [path] - path is the path from which start parsing and modifing files')
+
 def main():
     if len(sys.argv) == 1:
         pathToStart = '.'
     elif len(sys.argv) == 2:
+        if sys.argv[1] == '-h':
+            PrintHelp()
+            return
         pathToStart = sys.argv[1]
     else:
         print('uncorrect parameters')
