@@ -93,6 +93,5 @@ def main():
 
     ModifiedFilesDisplay(modifiedFilesList)
 
-
 if __name__ == "__main__":
     main()
