@@ -3,18 +3,13 @@ import sys
 fileExtensions = ['.c']
 
 def OtherCharactersAfterBracket(line):
-    print('line to analyze: ', line)
-    print(repr(line))
     lineLen = len(line)
     bracketPos = line.rfind('{')
     for i in range(bracketPos+1, lineLen):
-        print('character: ', line[i])
         if line[i] == ' ' or line[i] == '\t' or line[i] == '\n' or line[i] == '\r' or line[i] == '\0':
             continue
         else:
-            print('returning True')
             return True
-    print('returning False')
     return False
     
    
@@ -42,15 +37,10 @@ def PrintHelp():
     print('pyrebracket [path] - path is the path from which start parsing and modifing files')
 
 def BracketIsTheOnlyCharacterInLine(line):
-    print('line repr is')
-    print(repr(line))
     l = line.replace(' ', '')
     l = l.replace('\t', '')
     l = l.replace('\n', '')
     l = l.replace('\r', '')
-    print('l: ')
-    print(repr(l))
-
     return len(l) == 1
 
 
@@ -85,8 +75,6 @@ def main():
         while i < len(lines):
             if '{' in lines[i]:
                 if OtherCharactersAfterBracket(lines[i]) == False and BracketIsTheOnlyCharacterInLine(lines[i]) == False:
-                    print('OtherCharactersAfterBracket(lines[i])', OtherCharactersAfterBracket(lines[i]))
-                    print('BracketIsTheOnlyCharacterInLine(lines[i])', BracketIsTheOnlyCharacterInLine(lines[i]))
                     if flag == 0:
                         modifiedFilesList.append(filePath)
                         flag = 1
