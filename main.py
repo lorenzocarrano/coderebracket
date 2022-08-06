@@ -11,7 +11,6 @@ def OtherCharactersAfterBracket(line):
         else:
             return True
     return False
-    
    
 def CountLeadingTabs(line):
     i = 0
@@ -43,7 +42,6 @@ def BracketIsTheOnlyCharacterInLine(line):
     l = l.replace('\r', '')
     return len(l) == 1
 
-
 def main():
     if len(sys.argv) == 1:
         pathToStart = '.'
@@ -55,7 +53,6 @@ def main():
     else:
         print('uncorrect parameters')
         return
-
 
     filesList = []
     modifiedFilesList = []
